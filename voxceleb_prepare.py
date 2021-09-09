@@ -29,9 +29,9 @@ ENROL_CSV = "enrol.csv"
 SAMPLERATE = 16000
 
 
-DEV_WAV = "vox1_dev_wav.zip"
-TEST_WAV = "vox1_test_wav.zip"
-META = "meta"
+#DEV_WAV = "vox1_dev_wav.zip"
+#TEST_WAV = "vox1_test_wav.zip"
+#META = "meta"
 
 
 def prepare_voxceleb(
@@ -109,15 +109,15 @@ def prepare_voxceleb(
     save_csv_dev = os.path.join(save_folder, DEV_CSV)
 
     # Create the data folder contains VoxCeleb1 test data from the source
-    if source is not None:
-        if not os.path.exists(os.path.join(data_folder, "wav", "id10270")):
-            logger.info(f"Extracting {source}/{TEST_WAV} to {data_folder}")
-            shutil.unpack_archive(os.path.join(source, TEST_WAV), data_folder)
-        if not os.path.exists(os.path.join(data_folder, "meta")):
-            logger.info(f"Copying {source}/meta to {data_folder}")
-            shutil.copytree(
-                os.path.join(source, "meta"), os.path.join(data_folder, "meta")
-            )
+#    if source is not None:
+#        if not os.path.exists(os.path.join(data_folder, "wav", "id10270")):
+#            logger.info(f"Extracting {source}/{TEST_WAV} to {data_folder}")
+#            shutil.unpack_archive(os.path.join(source, TEST_WAV), data_folder)
+#        if not os.path.exists(os.path.join(data_folder, "meta")):
+#            logger.info(f"Copying {source}/meta to {data_folder}")
+#            shutil.copytree(
+#                os.path.join(source, "meta"), os.path.join(data_folder, "meta")
+#            )
 
     # Check if this phase is already done (if so, skip it)
     if skip(splits, save_folder, conf):
@@ -214,12 +214,13 @@ def _check_voxceleb_folders(data_folders, splits):
     for data_folder in data_folders:
 
         if "train" in splits:
-            folder_vox1 = os.path.join(data_folder, "wav", "id10001")
+#            folder_vox1 = os.path.join(data_folder, "wav", "id10001")
             folder_vox2 = os.path.join(data_folder, "wav", "id00012")
 
-            if not os.path.exists(folder_vox1) or not os.path.exists(
-                folder_vox2
-            ):
+#            if not os.path.exists(folder_vox1) or not os.path.exists(
+#                folder_vox2
+#            ):
+            if not os.path.exists(folder_vox2):
                 err_msg = "the specified folder does not contain Voxceleb"
                 raise FileNotFoundError(err_msg)
 
@@ -232,13 +233,13 @@ def _check_voxceleb_folders(data_folders, splits):
                 )
                 raise FileNotFoundError(err_msg)
 
-        folder = os.path.join(data_folder, "meta")
-        if not os.path.exists(folder):
-            err_msg = (
-                "the folder %s does not exist (as it is expected in "
-                "the Voxceleb dataset)" % folder
-            )
-            raise FileNotFoundError(err_msg)
+#        folder = os.path.join(data_folder, "meta")
+#        if not os.path.exists(folder):
+#            err_msg = (
+#                "the folder %s does not exist (as it is expected in "
+#                "the Voxceleb dataset)" % folder
+#            )
+#            raise FileNotFoundError(err_msg)
 
 
 # Used for verification split
